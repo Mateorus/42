@@ -15,6 +15,7 @@ int main(void)
 
 	fd = open("test.txt", O_RDONLY);
 	i = get_next_line(fd, &str);
-	printf("%s", str);
+	write(1, str, 4);
+	close(fd);
 	return (0);
 }
