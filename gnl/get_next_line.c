@@ -6,7 +6,7 @@
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 20:02:58 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/10 18:47:19 by gstiedem         ###   ########.fr       */
+/*   Updated: 2018/12/10 20:40:24 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,24 @@ int		get_next_line(const int fd, char **line)
 	static t_fdlst	*l;
 	ssize_t			r;
 	char			buf[BUFF_SIZE + 1];
+	char			**str;
 
 	if (fd < 0 || !line || BUFF_SIZE < 1 ||
 		(r = read(fd, buf, BUFF_SIZE)) == -1)
 		return (-1);
+	if (!r)
+		return (0);
 	buf[r] = 0;
 	while (!(*line = get_lst_line(find_fd_content(&l, fd), buf)))
 	{
-		if (!(r = read(fd, buf, BUFF_SIZE)))
-			return (-1);
+		if (!(r = read(fd, buf, BUFF_SIZE)) && !*line)
+		{
+			str = find_fd_content(&l, fd);
+			*line = ft_strdup(*str);
+			ft_strdel(str);
+			return (1);
+		}
 		buf[r] = 0;
 	}
-	return (r == 0 ? 0 : 1 );
+	return (1);
 }

@@ -6,14 +6,14 @@
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 20:03:08 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/10 17:18:18 by gstiedem         ###   ########.fr       */
+/*   Updated: 2018/12/10 20:26:35 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # include "libft.h"
-# define BUFF_SIZE 1
+# define BUFF_SIZE 500
 
 typedef struct	s_fdlst
 {
