@@ -6,7 +6,7 @@
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 20:02:58 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/10 20:40:24 by gstiedem         ###   ########.fr       */
+/*   Updated: 2018/12/11 14:36:18 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,29 +40,40 @@ char	**find_fd_content(t_fdlst **start, const int fd)
 	return (&tmp->content);
 }
 
-char	*get_lst_line(char **lst_content, char *buf)
+char	*get_lst_line(char **lst_content, ssize_t r)
 {
 	char	*tmp;
 	char	*sub;
 
-	if (!(*lst_content))
-		*lst_content = ft_strdup(buf);
-	else
-	{
-		tmp = ft_strjoin(*lst_content, buf);
-		free(*lst_content);
-		*lst_content = tmp;
-	}
+	sub = NULL;
 	if ((tmp = ft_strchr(*lst_content, '\n')))
 	{
 		*tmp = 0;
 		sub = ft_strsub(*lst_content, 0, tmp - *lst_content);
 		tmp = ft_strdup(tmp + 1);
-		free(*lst_content);
+		ft_strdel(lst_content);
 		*lst_content = tmp;
-		return (sub);
 	}
-	return (NULL);
+	else if (r < BUFF_SIZE)
+	{
+		sub = ft_strdup(*lst_content);
+		ft_strdel(lst_content);
+	}
+	return (sub);
+}
+
+void	add_lst_line(char **lst_content, char *buf)
+{
+	char	*tmp;
+
+	if (!(*lst_content))
+		*lst_content = ft_strdup(buf);
+	else if (*buf)
+	{
+		tmp = ft_strjoin(*lst_content, buf);
+		ft_strdel(lst_content);
+		*lst_content = tmp;
+	}
 }
 
 int		get_next_line(const int fd, char **line)
@@ -70,24 +81,25 @@ int		get_next_line(const int fd, char **line)
 	static t_fdlst	*l;
 	ssize_t			r;
 	char			buf[BUFF_SIZE + 1];
-	char			**str;
+	char			*str;
+	char			**content;
 
 	if (fd < 0 || !line || BUFF_SIZE < 1 ||
 		(r = read(fd, buf, BUFF_SIZE)) == -1)
 		return (-1);
-	if (!r)
-		return (0);
 	buf[r] = 0;
-	while (!(*line = get_lst_line(find_fd_content(&l, fd), buf)))
+	content = find_fd_content(&l, fd);
+	add_lst_line(content, buf);
+	while (!(str = get_lst_line(content, r)))
 	{
-		if (!(r = read(fd, buf, BUFF_SIZE)) && !*line)
-		{
-			str = find_fd_content(&l, fd);
-			*line = ft_strdup(*str);
-			ft_strdel(str);
-			return (1);
-		}
+		if ((r = read(fd, buf, BUFF_SIZE)) == -1)
+			return (-1);
 		buf[r] = 0;
+		add_lst_line(content, buf);
 	}
+	if (!*content && !r && !*str)
+		return (0);
+	else
+		*line = str;
 	return (1);
 }
