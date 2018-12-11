@@ -13,7 +13,7 @@ int main(void)
 	int		i;
 	int		fd;
 
-	fd = open("test1.txt", O_RDONLY);
+	fd = open("test.txt", O_RDONLY);
 	while ((i = get_next_line(fd, &str)))
 	{
 		printf("%s\n", str);
