@@ -15,14 +15,17 @@ int main(void)
 
 	fd = open("test.txt", O_RDONLY);
 	while ((i = get_next_line(fd, &str)))
-		printf("%s", str);
-/*	i = get_next_line(fd, &str);
-	printf("%s\n", str);
-	printf("%d\n", i);
-	i = get_next_line(fd, &str);
-	printf("%s\n", str);
-	printf("%d\n", i);
-	*/
+	{
+		printf("%s\n", str);
+		free(str);
+	}
+//	i = get_next_line(fd, &str);
+//	printf("%s\n", str);
+//	printf("%d\n", i);
+//	i = get_next_line(fd, &str);
+//	printf("%s\n", str);
+//	printf("%d\n", i);
+//	free(str);
 	close(fd);
 	return (0);
 }

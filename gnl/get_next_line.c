@@ -6,7 +6,7 @@
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 20:02:58 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/11 14:36:18 by gstiedem         ###   ########.fr       */
+/*   Updated: 2018/12/11 16:05:23 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-char	**find_fd_content(t_fdlst **start, const int fd)
+char	**find_fd_content(t_fdlst **first, const int fd)
 {
 	t_fdlst	*tmp;
 
-	if (!*start)
+	if (!*first)
 	{
-		*start = malloc(sizeof(t_fdlst));
-		(*start)->fd = fd;
-		(*start)->next = NULL;
-		(*start)->content = NULL;
+		*first = malloc(sizeof(t_fdlst));
+		(*first)->fd = fd;
+		(*first)->next = NULL;
+		(*first)->content = NULL;
 	}
-	tmp = *start;
+	tmp = *first;
 	while (tmp)
 	{
 		if (tmp->fd == fd)
@@ -33,10 +33,10 @@ char	**find_fd_content(t_fdlst **start, const int fd)
 		tmp = tmp->next;
 	}
 	tmp = malloc(sizeof(t_fdlst));
-	tmp->next = *start;
+	tmp->next = *first;
 	tmp->fd = fd;
 	tmp->content = NULL;
-	*start = tmp;
+	*first = tmp;
 	return (&tmp->content);
 }
 
