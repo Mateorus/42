@@ -6,7 +6,7 @@
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 20:02:58 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/11 17:34:29 by gstiedem         ###   ########.fr       */
+/*   Updated: 2018/12/11 19:13:57 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-t_fdlst		*find_lst(t_fdlst **first, const int fd)
+t_fdlst		*get_lst(t_fdlst **first, const int fd)
 {
 	t_fdlst	*tmp;
 
@@ -40,19 +40,22 @@ t_fdlst		*find_lst(t_fdlst **first, const int fd)
 	return (tmp);
 }
 
-char		*get_lst_line(t_fdlst *l, ssize_t r)
+char		*get_lst_line(t_fdlst *l)
 {
 	char	*tmp;
 	char	*sub;
 
-	sub = NULL;
+	if (!l->content || !*l->content)
+	{
+		return (NULL);
+	}
 	if ((tmp = ft_strchr(l->content, '\n')))
 	{
 		*tmp = 0;
 		sub = ft_strsub(l->content, 0, tmp - l->content);
 		l->content = tmp + 1;
 	}
-	else if (r < BUFF_SIZE)
+	else
 	{
 		sub = ft_strdup(l->content);
 		ft_strdel(&l->start);
@@ -70,7 +73,7 @@ void		add_lst_line(t_fdlst *l, char *buf)
 		l->content = ft_strdup(buf);
 		l->start = l->content;
 	}
-	else if (*buf)
+	else
 	{
 		tmp = ft_strjoin(l->content, buf);
 		ft_strdel(&l->start);
@@ -87,25 +90,28 @@ int			get_next_line(const int fd, char **line)
 	char			buf[BUFF_SIZE + 1];
 	char			*str;
 
-	if (fd < 0 || !line || BUFF_SIZE < 1 ||
-		(r = read(fd, buf, BUFF_SIZE)) == -1)
+	if (!line)
 		return (-1);
-	buf[r] = 0;
-	lst = find_lst(&l, fd);
-	add_lst_line(lst, buf);
-	while (!(str = get_lst_line(lst, r)))
-	{
-		if ((r = read(fd, buf, BUFF_SIZE)) == -1)
-			return (-1);
-		buf[r] = 0;
-		add_lst_line(lst, buf);
-	}
-	if (!lst->content && !r && !*str)
-	{
-		free(str);
-		return (0);
-	}
-	else
+	lst = get_lst(&l, fd);
+	while ((r = read(fd, buf, BUFF_SIZE)))
+		{
+			if (r == -1)
+				return (-1);
+			add_lst_line(lst, buf);
+			if (ft_isin(buf, '\n', r))
+				break ;
+		}
+	if ((str = get_lst_line(lst)))
 		*line = str;
-	return (1);
+	ft_strdel(&lst->start);
+	return (str != 0 ? 1 : 0);
 }
+
+
+
+
+
+
+
+
+
