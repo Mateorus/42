@@ -6,7 +6,7 @@
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 20:02:58 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/11 19:13:57 by gstiedem         ###   ########.fr       */
+/*   Updated: 2018/12/12 16:14:59 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,13 @@ t_fdlst		*get_lst(t_fdlst **first, const int fd)
 
 	if (!*first)
 	{
-		*first = malloc(sizeof(t_fdlst));
-		(*first)->fd = fd;
-		(*first)->next = NULL;
-		(*first)->content = NULL;
+		tmp = malloc(sizeof(t_fdlst));
+		tmp->fd = fd;
+		tmp->next = NULL;
+		tmp->content = NULL;
+		tmp->start = NULL;
+		*first = tmp;
+		return (tmp);
 	}
 	tmp = *first;
 	while (tmp)
@@ -33,9 +36,10 @@ t_fdlst		*get_lst(t_fdlst **first, const int fd)
 		tmp = tmp->next;
 	}
 	tmp = malloc(sizeof(t_fdlst));
-	tmp->next = *first;
 	tmp->fd = fd;
+	tmp->next = *first;
 	tmp->content = NULL;
+	tmp->start = NULL;
 	*first = tmp;
 	return (tmp);
 }
@@ -45,8 +49,11 @@ char		*get_lst_line(t_fdlst *l)
 	char	*tmp;
 	char	*sub;
 
-	if (!l->content || !*l->content)
+	tmp = NULL;
+	sub = NULL;
+	if (!*l->content)
 	{
+		ft_strdel(&l->start);
 		return (NULL);
 	}
 	if ((tmp = ft_strchr(l->content, '\n')))
@@ -68,6 +75,7 @@ void		add_lst_line(t_fdlst *l, char *buf)
 {
 	char	*tmp;
 
+	tmp = NULL;
 	if (!l->content)
 	{
 		l->content = ft_strdup(buf);
@@ -97,13 +105,13 @@ int			get_next_line(const int fd, char **line)
 		{
 			if (r == -1)
 				return (-1);
+			buf[r] = 0;
 			add_lst_line(lst, buf);
 			if (ft_isin(buf, '\n', r))
 				break ;
 		}
 	if ((str = get_lst_line(lst)))
 		*line = str;
-	ft_strdel(&lst->start);
 	return (str != 0 ? 1 : 0);
 }
 
