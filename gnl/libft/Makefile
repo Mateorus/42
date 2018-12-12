@@ -6,7 +6,7 @@
 #    By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/24 15:33:49 by gstiedem          #+#    #+#              #
-#    Updated: 2018/12/03 21:18:38 by gstiedem         ###   ########.fr        #
+#    Updated: 2018/12/12 16:33:10 by gstiedem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME):
-	@gcc -Wall -Werror -Wextra $(SRC) -c
+	@gcc -Wall -Werror -Wextra -I ./includes $(SRC) -c
 	@ar -rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 
