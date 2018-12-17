@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/14 14:25:21 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/17 18:51:53 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/12/14 14:30:52 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/12/17 20:34:31 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
-#include <stdio.h>
+#ifndef FILLIT_H
+# define FILLIT_H
 
-int	main(int argc, char **argv)
-{
-	int		fd;
-	int		i;
+# include <fcntl.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-	if (argc != 2)
-		return (usage());
-	if ((fd = open(argv[1], O_RDONLY)) == -1)
-	{
-		ft_putstr("no such file\n");
-		return (1);
-	}
-	i = fillit(fd);
+# define MAX_SIZE_OF_FILE 545
+# define CARD_SIZE 20
+# define MAX_CARDS 26
 
-}
+int		usage(void);
+void	ft_assert(int i);
+#endif
