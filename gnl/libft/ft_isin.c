@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_isin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/06 20:03:08 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/12 17:25:09 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/11/30 15:22:14 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/11/30 15:37:24 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft.h"
-# define BUFF_SIZE 1000
+#include "libft.h"
 
-typedef struct	s_fdlst
+size_t	ft_isin(char *arr, char c, size_t n)
 {
-	int				fd;
-	char			*content;
-	char			*start;
-	struct s_fdlst	*next;
-}				t_fdlst;
-int				get_next_line(const int fd, char **line);
+	size_t	i;
 
-#endif
+	if (!arr)
+		return (0);
+	i = 0;
+	while (i < n)
+	{
+		if (arr[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}

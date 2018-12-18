@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/06 20:03:08 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/12 17:25:09 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/12/14 14:30:52 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/12/17 20:34:31 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft.h"
-# define BUFF_SIZE 1000
+#ifndef FILLIT_H
+# define FILLIT_H
 
-typedef struct	s_fdlst
-{
-	int				fd;
-	char			*content;
-	char			*start;
-	struct s_fdlst	*next;
-}				t_fdlst;
-int				get_next_line(const int fd, char **line);
+# include <fcntl.h>
+# include <stdlib.h>
+# include <unistd.h>
 
+# define MAX_SIZE_OF_FILE 545
+# define CARD_SIZE 20
+# define MAX_CARDS 26
+
+int		usage(void);
+void	ft_assert(int i);
 #endif

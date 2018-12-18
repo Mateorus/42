@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/06 20:03:08 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/12 17:25:09 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/11/29 20:52:25 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/11/29 21:39:21 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft.h"
-# define BUFF_SIZE 1000
+#include "libft.h"
 
-typedef struct	s_fdlst
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int				fd;
-	char			*content;
-	char			*start;
-	struct s_fdlst	*next;
-}				t_fdlst;
-int				get_next_line(const int fd, char **line);
+	char	*str;
+	int		i;
 
-#endif
+	if (!s || !f)
+		return (NULL);
+	if (!(str = ft_strdup(s)))
+		return (NULL);
+	i = 0;
+	while (str[i])
+	{
+		str[i] = f(i, str[i]);
+		i++;
+	}
+	return (str);
+}
