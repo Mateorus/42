@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assert.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 15:58:37 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/17 18:52:07 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/11/24 19:22:09 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/11/27 17:41:00 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-void	ft_assert(int i)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	if (!i)
+	unsigned char	*str1;
+	unsigned char	*str2;
+	int				p;
+
+	str1 = (unsigned char*)s1;
+	str2 = (unsigned char*)s2;
+	p = 0;
+	while (n--)
 	{
-		ft_putstr("error\n");
-		exit(0);
+		if (*str1 != *str2)
+		{
+			p = *str1 - *str2;
+			break ;
+		}
+		str1++;
+		str2++;
 	}
+	return (p);
 }

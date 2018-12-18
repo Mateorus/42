@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assert.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 15:58:37 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/17 18:52:07 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/11/26 14:29:54 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/11/27 17:41:16 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-void	ft_assert(int i)
+char	*ft_strrchr(const char *s, int c)
 {
-	if (!i)
+	char	*tmp;
+
+	tmp = NULL;
+	while (1)
 	{
-		ft_putstr("error\n");
-		exit(0);
+		if (*s == (unsigned char)c)
+			tmp = (char*)s;
+		if (!*s)
+			break ;
+		s++;
 	}
+	return (tmp);
 }

@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assert.c                                        :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 15:58:37 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/17 18:52:07 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/11/26 14:41:58 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/11/27 20:00:36 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-void	ft_assert(int i)
+char	*ft_strstr(const char *haystack, const char *needle)
 {
-	if (!i)
+	if (!*needle)
+		return ((char*)haystack);
+	while (*haystack)
 	{
-		ft_putstr("error\n");
-		exit(0);
+		if (*haystack == *needle)
+		{
+			if (!ft_memcmp(haystack, needle, ft_strlen(needle)))
+				return ((char*)haystack);
+		}
+		haystack++;
 	}
+	return (NULL);
 }

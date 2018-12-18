@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assert.c                                        :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 15:58:37 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/17 18:52:07 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/11/29 15:58:35 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/11/29 18:21:54 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
+#include <stdlib.h>
 
-void	ft_assert(int i)
+void	*ft_memalloc(size_t size)
 {
-	if (!i)
-	{
-		ft_putstr("error\n");
-		exit(0);
-	}
+	void	*tmp;
+
+	if (!(tmp = malloc(size)))
+		return (NULL);
+	return (ft_memset(tmp, 0, size));
 }

@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assert.c                                        :+:      :+:    :+:   */
+/*   ft_pow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 15:58:37 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/17 18:52:07 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/12/03 12:12:04 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/12/03 12:33:48 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-void	ft_assert(int i)
+int	ft_pow(int i, int p)
 {
-	if (!i)
-	{
-		ft_putstr("error\n");
-		exit(0);
-	}
+	int	res;
+
+	if (p == 0)
+		return (1);
+	if (p < 0)
+		return (0);
+	res = i;
+	while (--p)
+		res *= i;
+	return (res);
 }

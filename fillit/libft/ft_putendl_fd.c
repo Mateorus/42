@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assert.c                                        :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 15:58:37 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/17 18:52:07 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/12/03 14:41:51 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/12/03 14:44:02 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
+#include <unistd.h>
 
-void	ft_assert(int i)
+void	ft_putendl_fd(char const *s, int fd)
 {
-	if (!i)
-	{
-		ft_putstr("error\n");
-		exit(0);
-	}
+	ft_putstr_fd(s, fd);
+	write(fd, "\n", 1);
 }

@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assert.c                                        :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 15:58:37 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/17 18:52:07 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/11/24 20:00:41 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/11/27 14:30:11 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-void	ft_assert(int i)
+char	*ft_strncat(char *s1, const char *s2, size_t n)
 {
-	if (!i)
-	{
-		ft_putstr("error\n");
-		exit(0);
-	}
+	(void)ft_strnlcpy(ft_strchr(s1, '\0'), s2, n);
+	return (s1);
 }

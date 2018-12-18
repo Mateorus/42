@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assert.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 15:58:37 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/17 18:52:07 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/11/24 14:21:03 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/11/26 20:46:55 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-void	ft_assert(int i)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	if (!i)
+	void	*copy;
+
+	copy = dst;
+	if (dst < src)
+		dst = ft_memcpy(dst, src, len);
+	else
 	{
-		ft_putstr("error\n");
-		exit(0);
+		dst += len - 1;
+		src += len - 1;
+		while (len--)
+			*(char*)dst-- = *(char*)src--;
 	}
+	return (copy);
 }

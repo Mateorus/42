@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assert.c                                        :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 15:58:37 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/17 18:52:07 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/11/24 19:49:03 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/11/24 19:54:27 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-void	ft_assert(int i)
+char	*ft_strncpy(char *dst, const char *src, size_t len)
 {
-	if (!i)
+	char	*copy;
+
+	copy = dst;
+	while (len--)
 	{
-		ft_putstr("error\n");
-		exit(0);
+		if (*src)
+			*dst++ = *src++;
+		else
+			*dst++ = 0;
 	}
+	return (copy);
 }

@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assert.c                                        :+:      :+:    :+:   */
+/*   ft_strdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 15:58:37 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/17 18:52:07 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/11/29 18:40:49 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/11/29 18:49:43 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
+#include <stdlib.h>
 
-void	ft_assert(int i)
+void	ft_strdel(char **as)
 {
-	if (!i)
+	if (as)
 	{
-		ft_putstr("error\n");
-		exit(0);
+		free(*as);
+		*as = NULL;
 	}
 }

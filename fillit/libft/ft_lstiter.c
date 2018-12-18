@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assert.c                                        :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 15:58:37 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/17 18:52:07 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/12/03 20:15:14 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/12/03 20:18:20 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-void	ft_assert(int i)
+void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
 {
-	if (!i)
+	if (!f)
+		return ;
+	while (lst)
 	{
-		ft_putstr("error\n");
-		exit(0);
+		f(lst);
+		lst = lst->next;
 	}
 }

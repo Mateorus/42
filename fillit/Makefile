@@ -13,15 +13,26 @@
 NAME=fillit
 CC=gcc
 CFLAGS=-Wall -Werror -Wextra
-SRC=./$(NAME)/*.c
-INCLUDES=./$(NAME)
+DBGFLAGS=-g
+LIBFLAGS=-L ./libft -lft -I $(INCLUDES)
+SRC=./src/*.c
+INCLUDES=./libft
+LIB_PATH=./libft
+
+.PHONY: $(LIB_PATH)
 
 all: $(NAME)
 
-$(NAME):
-	gcc -o fillit  main.c ./src/*.c -I ./src -I./libft -L ./libft -l ft -g	
-
+$(NAME): $(LIB_PATH)
+	$(CC) $(CFLAGS) $(SRC) $(LIBFLAGS) -o $(NAME)
 clean:
+
+fclen: clean
 	rm -rf $(NAME)
 
 re: clean $(NAME)
+
+$(LIB_PATH):
+	make -C $(LIB_PATH)
+dbg:
+	$(CC) $(CFLAGC) $(DBGFLAGS) $(SRC) $(LIBFLAGS) -o $(NAME)

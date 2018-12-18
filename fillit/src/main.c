@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assert.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 15:58:37 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/17 18:52:07 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/12/14 14:25:21 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/12/17 18:51:53 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "fillit.h"
 
-void	ft_assert(int i)
+int	main(int argc, char **argv)
 {
-	if (!i)
+	int		fd;
+
+	if (argc != 2)
 	{
-		ft_putstr("error\n");
-		exit(0);
+		ft_putstr("usage: fillit <input file>\n");
+		return (0);
 	}
+	if ((fd = open(argv[1], O_RDONLY)) == -1)
+	{
+		ft_putstr("no such file\n");
+		return (1);
+	}
+	fillit(fd);
+
 }

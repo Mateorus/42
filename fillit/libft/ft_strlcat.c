@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assert.c                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 15:58:37 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/17 18:52:07 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/11/26 13:05:38 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/12/04 13:10:29 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-void	ft_assert(int i)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	if (!i)
+	size_t srclen;
+	size_t dstlen;
+
+	srclen = ft_strlen(src);
+	dstlen = ft_strlen(dst);
+	if (size <= dstlen)
+		return (size + srclen);
+	if (srclen < size - dstlen)
+		ft_memcpy(dst + dstlen, src, srclen + 1);
+	else
 	{
-		ft_putstr("error\n");
-		exit(0);
+		ft_memcpy(dst + dstlen, src, size - dstlen - 1);
+		dst[size - 1] = '\0';
 	}
+	return (dstlen + srclen);
 }

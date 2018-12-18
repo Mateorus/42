@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assert.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 15:58:37 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/17 18:52:07 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/11/24 19:11:19 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/11/27 13:58:19 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-void	ft_assert(int i)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	if (!i)
+	unsigned char	*str;
+
+	str = (unsigned char*)s;
+	while (n--)
 	{
-		ft_putstr("error\n");
-		exit(0);
+		if (*str++ == (unsigned char)c)
+			return ((void*)--str);
 	}
+	return (NULL);
 }

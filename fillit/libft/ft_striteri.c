@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assert.c                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 15:58:37 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/17 18:52:07 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/11/29 19:36:30 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/11/29 19:55:11 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-void	ft_assert(int i)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	if (!i)
+	unsigned int	i;
+
+	i = 0;
+	if (s && f)
 	{
-		ft_putstr("error\n");
-		exit(0);
+		while (s[i])
+		{
+			f(i, &s[i]);
+			i++;
+		}
 	}
 }

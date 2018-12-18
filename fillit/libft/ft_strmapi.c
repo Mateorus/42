@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assert.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 15:58:37 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/17 18:52:07 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/11/29 20:52:25 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/11/29 21:39:21 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-void	ft_assert(int i)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	if (!i)
+	char	*str;
+	int		i;
+
+	if (!s || !f)
+		return (NULL);
+	if (!(str = ft_strdup(s)))
+		return (NULL);
+	i = 0;
+	while (str[i])
 	{
-		ft_putstr("error\n");
-		exit(0);
+		str[i] = f(i, str[i]);
+		i++;
 	}
+	return (str);
 }

@@ -16,11 +16,16 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "libft.h"
 
 # define MAX_SIZE_OF_FILE 545
 # define CARD_SIZE 20
 # define MAX_CARDS 26
-
-int		usage(void);
+void	fillit(int fd);
 void	ft_assert(int i);
+int		validator(int fd, char **argv);
+void	write_valid_card(char **argv, char *buf);
+int		valid_block(char *buf);
+void	ft_putstr(char const *s);
+char	*ft_strdup(const char *s1);
 #endif

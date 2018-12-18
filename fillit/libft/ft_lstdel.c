@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assert.c                                        :+:      :+:    :+:   */
+/*   ft_lstdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 15:58:37 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/17 18:52:07 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/12/03 15:42:44 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/12/03 20:03:09 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-void	ft_assert(int i)
+void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 {
-	if (!i)
+	t_list	*tmp;
+
+	if (!alst || !del)
+		return ;
+	while (*alst)
 	{
-		ft_putstr("error\n");
-		exit(0);
+		tmp = (*alst)->next;
+		ft_lstdelone(alst, del);
+		*alst = tmp;
 	}
+	ft_memdel((void**)alst);
 }

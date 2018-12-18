@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assert.c                                        :+:      :+:    :+:   */
+/*   ft_isin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 15:58:37 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/17 18:52:07 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/11/30 15:22:14 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/11/30 15:37:24 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-void	ft_assert(int i)
+size_t	ft_isin(char *arr, char c, size_t n)
 {
-	if (!i)
+	size_t	i;
+
+	if (!arr)
+		return (0);
+	i = 0;
+	while (i < n)
 	{
-		ft_putstr("error\n");
-		exit(0);
+		if (arr[i] == c)
+			return (1);
+		i++;
 	}
+	return (0);
 }

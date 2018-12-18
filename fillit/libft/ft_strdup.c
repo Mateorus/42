@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/14 14:25:21 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/17 18:51:53 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/11/24 19:33:17 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/11/29 15:39:16 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
-#include <stdio.h>
+#include "libft.h"
+#include <stdlib.h>
 
-int	main(int argc, char **argv)
+char	*ft_strdup(const char *s1)
 {
-	int		fd;
-	int		i;
+	size_t	len;
+	char	*p;
 
-	if (argc != 2)
-		return (usage());
-	if ((fd = open(argv[1], O_RDONLY)) == -1)
-	{
-		ft_putstr("no such file\n");
-		return (1);
-	}
-	i = fillit(fd);
-
+	len = ft_strlen(s1);
+	if (!(p = (char*)malloc(sizeof(*p) * (len + 1))))
+		return (NULL);
+	p = ft_memcpy(p, s1, len);
+	*(p + len) = 0;
+	return (p);
 }
