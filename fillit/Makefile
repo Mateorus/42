@@ -6,7 +6,7 @@
 #    By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/14 19:28:39 by gstiedem          #+#    #+#              #
-#    Updated: 2018/12/17 13:00:54 by gstiedem         ###   ########.fr        #
+#    Updated: 2018/12/20 14:24:11 by gstiedem         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,6 @@ fclen: clean
 re: clean $(NAME)
 
 $(LIB_PATH):
-	make -C $(LIB_PATH)
+	make -C $(LIB_PATH) && make -C $(LIB_PATH) clean
 dbg:
 	$(CC) $(CFLAGC) $(DBGFLAGS) $(SRC) $(LIBFLAGS) -o $(NAME)

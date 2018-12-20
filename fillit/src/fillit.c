@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fillit.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/20 14:17:24 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/12/20 14:17:42 by gstiedem         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 
 void	fillit(int fd)
@@ -10,7 +22,6 @@ void	fillit(int fd)
 		exit(0);
 	}
 	argv[validator(fd, argv)] = 0;
-	while (*argv)
-		ft_putstr(*argv++);
-//	print_square(tetramino_arr);
+	prepare_tetraminos(argv);
+	print_square(argv);
 }
