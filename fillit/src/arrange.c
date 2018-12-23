@@ -1,40 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_square.c                                       :+:      :+:    :+:   */
+/*   arrange.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/23 15:32:40 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/23 20:42:02 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/12/23 20:44:10 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/12/23 21:56:41 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-void	get_map(char **map, int map_side)
-{
-	int	i;
-	int	size;
-
-	ft_strdel(map);
-	size = map_side * map_side + map_side;
-	if (!(*map = malloc(sizeof(**map) * (size + 1))))
-	{
-		ft_putstr("malloc failed\n");
-		exit(0);
-	}
-	(*map)[size] = 0;
-	i = 0;
-	while (i < size)
-	{
-		if (!((i + 1) % (map_side + 1)))
-			(*map)[i] = '\n';
-		else
-			(*map)[i] = '.';
-		i++;
-	}
-}
 
 int		pop_block(char *map, int tetr_num)
 {
@@ -44,11 +20,12 @@ int		pop_block(char *map, int tetr_num)
 	while (*map)
 	{
 		if (*map == c)
-			c = '.';
+			*map = '.';
 		map++;
 	}
 	return (0);
 }
+/* TO_DO: doesn't work when map[i] is '.'!!!!!!!*/
 
 int		push_block(char *map, char *block, int map_side, int tetr_num)
 {
@@ -56,9 +33,10 @@ int		push_block(char *map, char *block, int map_side, int tetr_num)
 	int	len;
 
 	i = 0;
+	len = 0;
 	while (*(block + 1))
 	{
-		if (map[i] != '.' || (map[i] == '\n' && *block != '\n'))
+		if (map[i] != '.' && !(map[i] == '\n' && *block == '\n'))
 			return (pop_block(map, tetr_num));
 		if (*block == '\n')
 		{
@@ -83,6 +61,7 @@ int		try_to_push(char *map, char *block, int map_side, int tetr_num)
 	{
 		if (push_block(map, block, map_side, tetr_num))
 			return (1);
+		map++;
 	}
 	return (0);
 }
@@ -94,22 +73,27 @@ int		arrange(char *map, char **set, int map_side)
 	i = 0;
 	while (set[i])
 	{
-		if (try_to_push(map, set[i], map_side, i))
-			
+		if (!try_to_push(map, set[i], map_side, i))
+			return(0);
+		i++;
 	}
 	return (1);
 }
 
+char	*get_square(char **set)
+{
+	char	*map;
+	int		map_side;
 
-
-
-
-
-
-
-
-
-
-
-
-
+	map_side = MIN_MAP_SIDE;
+	map = NULL;
+	get_map(&map, map_side);
+	while (1)
+	{
+		if (!(arrange(map, set, map_side)))
+			get_map(&map, ++map_side);
+		else
+			break ;
+	}
+	return (map);
+}

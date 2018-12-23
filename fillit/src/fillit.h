@@ -6,7 +6,7 @@
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 14:30:52 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/23 20:45:12 by gstiedem         ###   ########.fr       */
+/*   Updated: 2018/12/23 21:02:18 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ void	prepare_tetraminos(char **set);
 void	trim(char *tetr);
 char	*get_square(char **set);
 void	print_square(char *square);
-int		arrange(char *map, char **set, int map_side);
+void	get_map(char **map, int map_side);
 #endif
