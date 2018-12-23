@@ -6,7 +6,7 @@
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 14:30:52 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/20 14:20:42 by gstiedem         ###   ########.fr       */
+/*   Updated: 2018/12/23 20:45:12 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,16 @@
 # include <unistd.h>
 # include "libft.h"
 
-# define CARD_SIZE 20
-# define MAX_CARDS 26
+# define CARD_SIZE	20
+# define MAX_CARDS	26
+# define MIN_MAP_SIDE	2
 
 void	fillit(int fd);
-void	ft_assert(int i);
-int		validator(int fd, char **argv);
-void	prepare_tetraminos(char **argv);
-void	print_square(char **argv);
+void	assert(int i);
+int		validator(int fd, char **set);
+void	prepare_tetraminos(char **set);
+void	trim(char *tetr);
+char	*get_square(char **set);
+void	print_square(char *square);
+int		arrange(char *map, char **set, int map_side);
 #endif

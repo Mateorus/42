@@ -6,7 +6,7 @@
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 14:19:11 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/20 14:19:33 by gstiedem         ###   ########.fr       */
+/*   Updated: 2018/12/23 18:02:39 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		valid_block(char *buf)
 	return (1);
 }
 
-void	write_valid_card(char **argv, char *buf)
+void	write_valid_card(char **set, char *buf)
 {
 	int	counter;
 	int	i;
@@ -48,21 +48,21 @@ void	write_valid_card(char **argv, char *buf)
 	while (++i < CARD_SIZE)
 	{
 		if ((i + 1) % 5 && (buf[i] != '.' && buf[i] != '#'))
-			ft_assert(0);
+			assert(0);
 		if (!((i + 1) % 5) && buf[i] != '\n')
-			ft_assert(0);
+			assert(0);
 		if (buf[i] == '#')
 			counter++;
 	}
-	ft_assert(counter == 4 && valid_block(buf));
-	if (!(*argv = ft_strdup(buf)))
+	assert(counter == 4 && valid_block(buf));
+	if (!(*set = ft_strdup(buf)))
 	{
 		ft_putstr("malloc failed\n");
 		exit(0);
 	}
 }
 
-int		validator(int fd, char **argv)
+int		validator(int fd, char **set)
 {
 	int		rd;
 	char	buf[CARD_SIZE + 1];
@@ -73,15 +73,15 @@ int		validator(int fd, char **argv)
 	file_size = 0;
 	while ((rd = read(fd, buf, CARD_SIZE + 1)) > 0)
 	{
-		ft_assert(buf[rd - 1] == '\n');
+		assert(buf[rd - 1] == '\n');
 		rd == 20 ? (buf[rd] = 0) : (buf[rd - 1] = 0);
-		write_valid_card(argv, buf);
-		argv++;
+		write_valid_card(set, buf);
+		set++;
 		total++;
 		file_size += rd;
 	}
 	if (rd == -1 || (file_size + 1) % (CARD_SIZE + 1) ||
 		file_size < CARD_SIZE || total > MAX_CARDS)
-		ft_assert(0);
+		assert(0);
 	return (total);
 }

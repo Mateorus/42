@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_square.c                                     :+:      :+:    :+:   */
+/*   help.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/20 14:07:56 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/23 18:04:14 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/12/23 20:46:45 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/12/23 20:46:56 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	print_square(char *square)
+void	assert(int i)
 {
-		ft_putstr(square);
-		ft_putchar('\n');
+	if (!i)
+	{
+		ft_putstr("error\n");
+		exit(0);
+	}
 }
+
+

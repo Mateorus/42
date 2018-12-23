@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_assert.c                                        :+:      :+:    :+:   */
+/*   get_square.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 15:58:37 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/17 18:52:07 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/12/23 20:42:09 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/12/23 20:42:32 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	ft_assert(int i)
+char	*get_square(char **set)
 {
-	if (!i)
+	char	*map;
+	int		map_side;
+
+	map_side = MIN_MAP_SIDE;
+	map = NULL;
+	get_map(&map, map_side);
+	while (1)
 	{
-		ft_putstr("error\n");
-		exit(0);
+		if (!(arrange(map, set, map_side)))
+			get_map(&map, ++map_side);
+		else
+			break ;
 	}
+	return (map);
 }

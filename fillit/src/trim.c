@@ -1,29 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.c                                           :+:      :+:    :+:   */
+/*   trim.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/20 14:17:24 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/23 18:01:19 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/12/21 14:34:44 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/12/23 11:27:10 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	fillit(int fd)
+void	delete_col(char *tetr)
 {
-	char	**argv;
-	char	*square;
+	int 	i;
+	char	*tmp;
 
-	if (!(argv = malloc(sizeof(*argv) * (MAX_CARDS + 1))))
+	tmp = tetr;
+	i = 0;
+	while (tetr[i])
 	{
-		ft_putstr("malloc failed\n");
-		exit(0);
+		if (tetr[i + 1] == '\n')
+			i++;
+		*tmp = tetr[i++];
+		tmp++;
 	}
-	argv[validator(fd, argv)] = 0;
-	prepare_tetraminos(argv);
-	square = get_square(argv);
-	print_square(square);
+	*tmp = 0;
+}
+
+void	trim(char *tetr)
+{
+	int i;
+	int j;
+
+	i = 5;
+	while (tetr[i - 2] == '.' && tetr[i * 2 - 2 ] == '.' &&
+			tetr[i * 3 - 2] == '.' && tetr[i * 4 - 2] == '.')
+	{
+		delete_col(tetr);
+		i--;
+	}
+	j = 3;
+	while (!(ft_strchr(&tetr[i * j], '#')))
+	{
+		tetr[i * j] = 0;
+		j--;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 12:21:53 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/20 14:15:02 by gstiedem         ###   ########.fr       */
+/*   Updated: 2018/12/23 16:51:46 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ void	shift_to_left_corner(char *s)
 	while (s[i] == '.' && i < 4)
 		i++;
 	if (i == 4)
-		return (shift_to_left_corner(to_up(s)));
+		shift_to_left_corner(to_up(s));
 	i = 0;
 	while (s[i] == '.' && i < 20)
 		i += 5;
 	if (i == 20)
-		return (shift_to_left_corner(to_left(s)));
+		shift_to_left_corner(to_left(s));
 }
 
 void	sharp_to_alpha(char *s, int num)
@@ -75,16 +75,17 @@ void	sharp_to_alpha(char *s, int num)
 	}
 }
 
-void	prepare_tetraminos(char **argv)
+void	prepare_tetraminos(char **set)
 {
 	int	i;
 
 	i = 0;
-	while (*argv)
+	while (*set)
 	{
-		shift_to_left_corner(*argv);
-		sharp_to_alpha(*argv, i);
-		argv++;
+		shift_to_left_corner(*set);
+		trim(*set);
+		sharp_to_alpha(*set, i);
+		set++;
 		i++;
 	}
 
