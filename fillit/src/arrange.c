@@ -6,7 +6,7 @@
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 20:44:10 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/23 21:56:41 by gstiedem         ###   ########.fr       */
+/*   Updated: 2018/12/24 13:31:41 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int		pop_block(char *map, int tetr_num)
 	}
 	return (0);
 }
-/* TO_DO: doesn't work when map[i] is '.'!!!!!!!*/
 
 int		push_block(char *map, char *block, int map_side, int tetr_num)
 {
@@ -33,24 +32,22 @@ int		push_block(char *map, char *block, int map_side, int tetr_num)
 	int	len;
 
 	i = 0;
-	len = 0;
+	len = ft_strchr(block, '\n') - block;
 	while (*(block + 1))
 	{
-		if (map[i] != '.' && !(map[i] == '\n' && *block == '\n'))
-			return (pop_block(map, tetr_num));
-		if (*block == '\n')
+		if (map[i] == '.' && (ft_isalpha(*block)))
+			map[i++] = *block++;
+		else if (*block == '\n')
 		{
 			if (!(i < (map_side + 1) * (map_side - 1)))
 				return (pop_block(map, tetr_num));
 			i += map_side + 1 - len;
-			len = 0;
 			block++;
-			continue;
 		}
-		map[i] = *block;
-		i++;
-		len++;
-		block++;
+		else if (*block++ == '.')
+			i++;
+		else
+			return (pop_block(map, tetr_num));
 	}
 	return (1);
 }
