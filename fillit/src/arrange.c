@@ -6,7 +6,7 @@
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 20:44:10 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/24 13:31:41 by gstiedem         ###   ########.fr       */
+/*   Updated: 2018/12/25 15:24:56 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,41 +56,46 @@ int		try_to_push(char *map, char *block, int map_side, int tetr_num)
 {
 	while (*map)
 	{
-		if (push_block(map, block, map_side, tetr_num))
+		if (*map == '.' && push_block(map, block, map_side, tetr_num))
 			return (1);
 		map++;
 	}
 	return (0);
 }
 
-int		arrange(char *map, char **set, int map_side)
+int		arrange(char *map, char **set, int map_side, int total)
 {
 	int		i;
+	t_sjt	arr[MAX_CARDS];
 
+	pop_arrs(arr, total);
 	i = 0;
-	while (set[i])
+	while (permute(arr, total))
 	{
-		if (!try_to_push(map, set[i], map_side, i))
-			return(0);
-		i++;
+		while (i < total)
+		{
+			if (!try_to_push(map, set[arr[i].num], map_side, arr[i].num))
+			{
+				i = 0;
+				break ;
+			}
+			i++;
+			if (i == total)
+				return (1);
+		}
 	}
-	return (1);
+	return (0);
 }
 
-char	*get_square(char **set)
+char	*get_square(char **set, int total)
 {
 	char	*map;
 	int		map_side;
 
-	map_side = MIN_MAP_SIDE;
+	map_side = sqr_root_ceiling(4 * total);
 	map = NULL;
 	get_map(&map, map_side);
-	while (1)
-	{
-		if (!(arrange(map, set, map_side)))
-			get_map(&map, ++map_side);
-		else
-			break ;
-	}
+	while (!arrange(map, set, map_side, total))
+		get_map(&map, ++map_side);
 	return (map);
 }

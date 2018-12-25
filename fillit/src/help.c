@@ -6,7 +6,7 @@
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 20:46:45 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/23 21:02:25 by gstiedem         ###   ########.fr       */
+/*   Updated: 2018/12/25 15:19:07 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,31 @@ void	assert(int i)
 	}
 }
 
+int		sqr_root_ceiling(int x)
+{
+	int	i;
+	int	sum;
 
+	sum = 0;
+	if (x == 1 || x == 0)
+		return (x);
+	i = 0;
+	while (sum <= x)
+	{
+		i++;
+		sum = i * i;
+	}
+	return (i);
+}
+
+void	pop_arrs(t_sjt arr[], int total)
+{
+	int	i;
+
+	i = -1;
+	while (++i < total)
+		arr[i].direction = LEFT;
+	i = -1;
+	while (++i < total)
+		arr[i].num = i;
+}

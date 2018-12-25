@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.c                                           :+:      :+:    :+:   */
+/*   permute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/20 14:17:24 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/24 20:21:33 by gstiedem         ###   ########.fr       */
+/*   Created: 2018/12/25 11:46:00 by gstiedem          #+#    #+#             */
+/*   Updated: 2018/12/25 15:30:47 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+					/* Steinhaus–Johnson–Trotter algorithm */
 #include "fillit.h"
 
-void	fillit(int fd)
-{
-	char	**argv;
-	char	*square;
-	int		total;
 
-	if (!(argv = malloc(sizeof(*argv) * (MAX_CARDS + 1))))
-	{
-		ft_putstr("malloc failed\n");
-		exit(0);
-	}
-	total = validator(fd, argv);
-	argv[total] = 0;
-	prepare_tetraminos(argv);
-	square = get_square(argv, total);
-	print_square(square);
+int		permute(t_sjt arr[], int total)
+{
+	int	tmp;
+	if (arr[0].num == 1)
+		return (0);
+	tmp = arr[0].num;
+	arr[0].num = arr[1].num;
+	arr[1].num = tmp;
+	return (1);
 }
