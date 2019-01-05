@@ -6,7 +6,7 @@
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/23 20:46:45 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/25 15:19:07 by gstiedem         ###   ########.fr       */
+/*   Updated: 2018/12/27 15:39:56 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int		sqr_root_ceiling(int x)
 	sum = 0;
 	if (x == 1 || x == 0)
 		return (x);
-	i = 0;
-	while (sum <= x)
+	i = 1;
+	while (sum < x)
 	{
 		i++;
 		sum = i * i;
@@ -68,8 +68,18 @@ void	pop_arrs(t_sjt arr[], int total)
 
 	i = -1;
 	while (++i < total)
-		arr[i].direction = LEFT;
-	i = -1;
-	while (++i < total)
+	{
 		arr[i].num = i;
+		arr[i].direction = LEFT;
+	}
+}
+
+void	clean_map(char *map)
+{
+	while (*map)
+	{
+		if (ft_isalpha(*map))
+			*map = '.';
+		map++;
+	}
 }

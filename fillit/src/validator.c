@@ -6,7 +6,7 @@
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 14:19:11 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/23 18:02:39 by gstiedem         ###   ########.fr       */
+/*   Updated: 2018/12/29 13:35:21 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	write_valid_card(char **set, char *buf)
 	{
 		if ((i + 1) % 5 && (buf[i] != '.' && buf[i] != '#'))
 			assert(0);
-		if (!((i + 1) % 5) && buf[i] != '\n')
+		if (!((i + 1) % 5) && !(buf[i] == '\n'))
 			assert(0);
 		if (buf[i] == '#')
 			counter++;

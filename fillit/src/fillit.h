@@ -6,7 +6,7 @@
 /*   By: gstiedem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 14:30:52 by gstiedem          #+#    #+#             */
-/*   Updated: 2018/12/25 15:24:17 by gstiedem         ###   ########.fr       */
+/*   Updated: 2018/12/27 16:05:36 by gstiedem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 
 # define CARD_SIZE		20
 # define MAX_CARDS		26
-# define MIN_MAP_SIDE	2
+# define MIN_MAP_SIDE	4
 # define LEFT			0
-# define RIGHT			1
+# define RIGHT			255
 typedef struct	s_sjt
 {
 	int		num;
@@ -39,4 +39,5 @@ void	get_map(char **map, int map_side);
 int		sqr_root_ceiling(int x);
 void	pop_arrs(t_sjt arr[], int total);
 int		permute(t_sjt arr[], int total);
+void	clean_map(char *map);
 #endif
