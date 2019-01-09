@@ -6,3 +6,7 @@
 	path = libft
 	url = https://github.com/Mateorus/21_libft.git
 	branch = master
+[submodule "init"]
+	path = init
+	url = https://github.com/Mateorus/21_init.git
+	branch = master
